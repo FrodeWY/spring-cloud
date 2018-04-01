@@ -1,0 +1,75 @@
+server:
+  port: 8080
+spring:
+  cloud:
+  #忽略指定名称的网卡
+    inetutils:
+      #使用正则表达式，指定使用的网络地址
+      preferred-networks:
+        - 192.168
+      #ignored-interfaces:
+      #   - docker0
+      #   - verth.*
+      #只使用站点本地地址
+#      use-only-site-local-interfaces: true
+
+  jpa:
+    generate-ddl: false
+    show-sql: true
+    hibernate:
+      ddl-auto: none
+  datasource:
+    platform: h2
+    schema: classpath:h2_sql/schema.sql
+    data: classpath:h2_sql/data.sql
+  application:
+  #用于指定注册到Eureka Server 上的应用名称
+    name: microservice-provider-user
+#    默认情况下很多端点是不允许访问的，会返回401:Unauthorized。
+#    management.security.enabled=false
+#    或者设置用户名密码，添加spring-boot-starter-security
+security:
+  user:
+    name: user
+    password: 123456
+# 开启安全验证
+management:
+  security:
+    enabled: true
+    roles: ADMIN
+# 定义项目info
+info:
+  app:
+    name: @project.artifactId@
+    encoding: @project.build.sourceEncoding@
+    java:
+      source: @java.version@
+      target: @java.version@
+eureka:
+  client:
+    service-url:
+#      defaultZone: http://user:123456@peer1:8071/eureka/,http://user:123456@peer2:8072/eureka/
+      defaultZone: http://user:123456@localhost:8070/eureka/
+    healthcheck:
+      enabled: true
+
+  instance:
+  #表示将自己的Ip注册到Eureka  Server，如果不配或者设为false，表示注册为服务所在的操作系统上的hostname 到Eureka Server
+    prefer-ip-address: true
+    #手动指定IP地址
+#    ip-address: 128.0.0.1
+    #定义元数据
+    metadata-map:
+      IP: 127.0.0.1
+      PORT: ${server.port}
+    #心跳设置，告诉服务器该实例仍在使用
+    lease-renewal-interval-in-seconds: 3
+    #告诉服务器如果10秒内未发送任何续约请求，则关闭该客户端
+    lease-expiration-duration-in-seconds: 10
+logging:
+  level:
+    root: INFO
+    org.hibernate: INFO
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+    org.hibernate.type.descriptor.sql.BasicExtractor: TRACE
+    org.springframework.cloud.commons.util.InetUtils: TRACE   # 开启这边的日志，可以打印出Spring查找网卡的过程
