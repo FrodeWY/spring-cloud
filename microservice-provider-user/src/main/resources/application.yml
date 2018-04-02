@@ -1,5 +1,5 @@
 server:
-  port: 8080
+  port: ${HOSTIP}
 spring:
   cloud:
   #忽略指定名称的网卡
@@ -66,6 +66,8 @@ eureka:
     lease-renewal-interval-in-seconds: 3
     #告诉服务器如果10秒内未发送任何续约请求，则关闭该客户端
     lease-expiration-duration-in-seconds: 10
+#    配置虚拟主机名
+#    virtual-host-name: userService
 logging:
   level:
     root: INFO

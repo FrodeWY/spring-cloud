@@ -16,7 +16,7 @@ public class UserController {
         this.userRepository = userRepository;
     }
 
-    @GetMapping("user/{id}")
+    @GetMapping(value = "user/{id}",produces = "application/json;charset=UTF-8",consumes = "application/json;charset=UTF-8")
     public User findById(@PathVariable Long id){
         User one = userRepository.findOne(id);
         if(one!=null){

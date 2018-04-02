@@ -4,11 +4,11 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.spring</groupId>
-	<artifactId>cloud</artifactId>
+	<artifactId>microservice-discovery-eureka</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>cloud</name>
+	<name>microservice-discovery-eureka</name>
 	<description>Simple Eureka Server</description>
 
 	<parent>
