@@ -2,7 +2,9 @@ package com.spring.cloud.com.rest;
 
 import com.netflix.appinfo.InstanceInfo;
 
+import com.spring.cloud.com.config.UrlConfig;
 import com.spring.cloud.com.domain.User;
+import org.apache.commons.lang.StringUtils;
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,13 +25,16 @@ public class MovieController {
     private final RestTemplate restTemplate;
     private final DiscoveryClient discoveryClient;
     private final LoadBalancerClient loadBalancerClient;
+    private final UrlConfig urlConfig;
     private final Logger LOGGER=LoggerFactory.getLogger(this.getClass());
 
-    public MovieController(RestTemplate restTemplate, DiscoveryClient discoveryClient, LoadBalancerClient loadBalancerClient) {
+    public MovieController(RestTemplate restTemplate, DiscoveryClient discoveryClient, LoadBalancerClient loadBalancerClient, UrlConfig urlConfig) {
         this.restTemplate = restTemplate;
         this.discoveryClient = discoveryClient;
         this.loadBalancerClient = loadBalancerClient;
+        this.urlConfig = urlConfig;
     }
+
     /**
      * 构建Basic认证请求，获取服务端数据
      * microservice-provider-user用户微服务的虚拟主机名，默认注册到Eureka Server 上的应用名称为虚拟主机名
@@ -41,7 +46,9 @@ public class MovieController {
         MediaType mediaType=MediaType.APPLICATION_JSON_UTF8;
         headers.setContentType(mediaType);
         headers.add("Accept",mediaType.toString());
-        String plainCredentials="user:123456";
+        String username = urlConfig.getUsername();
+        String password = urlConfig.getPassword();
+        String plainCredentials= username+":"+password;
         String base64Credentials=Base64.getEncoder().encodeToString(plainCredentials.getBytes());
         headers.add("Authorization","Basic "+base64Credentials);
         HttpEntity<String > entity=new HttpEntity<String>(headers);
