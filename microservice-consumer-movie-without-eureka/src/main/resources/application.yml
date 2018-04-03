@@ -1,0 +1,33 @@
+server:
+  port: 8081
+security:
+  user:
+    name: user
+    password: 123456
+management:
+  security:
+    enabled: true
+    roles: ADMIN
+info:
+  app:
+    name: @project.artifactId@
+    encoding: @project.build.sourceEncoding@
+    java:
+      source: @java.version@
+      target: @java.version@
+spring:
+  application:
+    name: microservice-consumer-movie
+# 脱离Eureka使用Ribbon
+microservice-provider-user:
+  ribbon:
+    listOfServers: localhost:8079,localhost:8080
+
+logging:
+  level:
+    root: INFO
+    org.hibernate: INFO
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+    org.hibernate.type.descriptor.sql.BasicExtractor: TRACE
+    org.springframework.cloud.commons.util.InetUtils: TRACE
+  file: \log\movie.log
