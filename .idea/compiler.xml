@@ -9,6 +9,7 @@
         <module name="cloud (1)" />
         <module name="cloud (2)" />
         <module name="microservice-consumer-movie" />
+        <module name="microservice-consumer-movie-ribbon-customizing" />
         <module name="microservice-discovery-eureka" />
         <module name="microservice-discovery-eureka-authenticating" />
         <module name="microservice-discovery-eureka-ha" />
@@ -19,6 +20,7 @@
       <module name="cloud (1)" target="1.8" />
       <module name="cloud (2)" target="1.8" />
       <module name="microservice-consumer-movie" target="1.8" />
+      <module name="microservice-consumer-movie-ribbon-customizing" target="1.8" />
       <module name="microservice-discovery-eureka" target="1.8" />
       <module name="microservice-discovery-eureka-authenticating" target="1.8" />
       <module name="microservice-discovery-eureka-ha" target="1.8" />
