@@ -36,15 +36,20 @@ eureka:
     lease-renewal-interval-in-seconds: 3
         #告诉服务器如果10秒内未发送任何续约请求，则关闭该客户端
     lease-expiration-duration-in-seconds: 10
-
 logging:
   level:
     root: INFO
     org.hibernate: INFO
     org.hibernate.type.descriptor.sql.BasicBinder: TRACE
     org.hibernate.type.descriptor.sql.BasicExtractor: TRACE
-    # 网络日志
     org.springframework.cloud.commons.util.InetUtils: TRACE
-    # 将Feign接口的日志级别设置为DEBUG，因为Feign的Logging.Level只对DEBUG做出响应
-    com.spring.cloud.com.feign_client.UserFeignClient: DEBUG
   file: \log\movie.log
+feign:
+#对请求和响应进行压缩
+  compression:
+    request:
+      enable: true
+      #设置支持的媒体类型列表
+      mime-types: text/xml,application/json,application/xml
+    response:
+      enable: true
