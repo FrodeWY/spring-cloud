@@ -7,9 +7,9 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 
 @SpringBootApplication
 @EnableDiscoveryClient
-public class MicroServiceProviderUserApplication {
+public class MicroServiceProviderUserWithAuthApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(MicroServiceProviderUserApplication.class, args);
+		SpringApplication.run(MicroServiceProviderUserWithAuthApplication.class, args);
 	}
 }

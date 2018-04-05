@@ -2,6 +2,8 @@ package com.spring.cloud.com.rest;
 
 import com.netflix.appinfo.InstanceInfo;
 
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixProperty;
 import com.spring.cloud.com.config.UrlConfig;
 import com.spring.cloud.com.domain.User;
 import org.apache.commons.lang.StringUtils;
@@ -40,6 +42,18 @@ public class MovieController {
      * microservice-provider-user用户微服务的虚拟主机名，默认注册到Eureka Server 上的应用名称为虚拟主机名
      * 可以使用配置属性eureka.instance.virtual-host-name或eureka.instance.secure-virtual-host-name指定虚拟主机名，
      * 当Ribbon和Eureka配合使用时，会自动将虚拟主机名映射成微服务的网络地址*/
+//    fallbackMethod指定回退方法，commandProperties自定义属性配置HystrixCommand
+    @HystrixCommand(fallbackMethod = "findByIdFallback", commandProperties = {
+//            超时时间
+            @HystrixProperty(name = "execution.isolation.thread.timeoutInMilliseconds", value = "5000"),
+//            断路器判断健康度时，手机信息所需要的持续时间
+            @HystrixProperty(name = "metrics.rollingStats.timeInMilliseconds", value = "10000")
+    }, threadPoolProperties = {
+//            核心线程数
+            @HystrixProperty(name = "coreSize", value = "2"),
+//            线程池最大队列大小
+            @HystrixProperty(name = "maxQueueSize", value = "10")
+    })
     @GetMapping(value = "/user/{id}",produces = "application/json;charset=UTF-8")
     public User findById(@PathVariable Long id){
         HttpHeaders headers=new HttpHeaders();
@@ -71,5 +85,13 @@ public class MovieController {
         ServiceInstance serviceInstance = loadBalancerClient.choose("microservice-provider-user");
 //       打印当前选择的是哪个节点
         LOGGER.info("{}:{}:{}",serviceInstance.getServiceId(),serviceInstance.getHost(),serviceInstance.getPort());
+    }
+
+    public User findByIdFallback(Long id){
+        User user=new User();
+        user.setId(-1L);
+        user.setName("默认用户");
+        user.setAge(12);
+        return user;
     }
 }

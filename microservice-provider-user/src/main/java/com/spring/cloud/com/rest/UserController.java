@@ -2,9 +2,7 @@ package com.spring.cloud.com.rest;
 
 import com.spring.cloud.com.domain.User;
 import com.spring.cloud.com.repository.UserRepository;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 
@@ -19,6 +17,26 @@ public class UserController {
     @GetMapping(value = "user/{id}",produces = "application/json;charset=UTF-8",consumes = "application/json;charset=UTF-8")
     public User findById(@PathVariable Long id){
         User one = userRepository.findOne(id);
+        if(one!=null){
+            return one;
+        }else {
+            return null;
+        }
+    }
+
+    @GetMapping(value = "user-get",produces = "application/json;charset=UTF-8",consumes = "application/json;charset=UTF-8")
+    public User getUser(@RequestParam Long id,@RequestParam String username){
+        User one = userRepository.findOne(id);
+        if(one!=null){
+            return one;
+        }else {
+            return null;
+        }
+    }
+
+    @PostMapping(value = "user-post",produces = "application/json;charset=UTF-8",consumes = "application/json;charset=UTF-8")
+    public User getUser(@RequestBody User user){
+        User one = userRepository.findOne(user.getId());
         if(one!=null){
             return one;
         }else {

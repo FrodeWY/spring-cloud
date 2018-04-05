@@ -4,11 +4,11 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.spring</groupId>
-	<artifactId>microservice-consumer-movie-ribbon-hystrix</artifactId>
+	<artifactId>microservice-consumer-movie-feign-manual</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>microservice-consumer-movie-ribbon-hystrix</name>
+	<name>mircroservice-consumer-movie-feign-manual</name>
 	<description>Spring cloud test movie</description>
 
 	<parent>
@@ -52,11 +52,11 @@
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-hystrix</artifactId>
+			<artifactId>spring-cloud-starter-eureka</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-eureka</artifactId>
+			<artifactId>spring-cloud-starter-feign</artifactId>
 		</dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>

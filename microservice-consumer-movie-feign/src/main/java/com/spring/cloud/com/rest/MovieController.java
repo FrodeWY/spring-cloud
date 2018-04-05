@@ -13,9 +13,7 @@ import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.cloud.client.loadbalancer.LoadBalancerClient;
 import org.springframework.http.*;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.Base64;
@@ -45,19 +43,8 @@ public class MovieController {
      * 当Ribbon和Eureka配合使用时，会自动将虚拟主机名映射成微服务的网络地址*/
     @GetMapping(value = "/user/{id}",produces = "application/json;charset=UTF-8")
     public User findById(@PathVariable Long id){
-        HttpHeaders headers=new HttpHeaders();
-        MediaType mediaType=MediaType.APPLICATION_JSON_UTF8;
-        headers.setContentType(mediaType);
-        headers.add("Accept",mediaType.toString());
-        String username = urlConfig.getUsername();
-        String password = urlConfig.getPassword();
-        String plainCredentials= username+":"+password;
-        String base64Credentials=Base64.getEncoder().encodeToString(plainCredentials.getBytes());
-        headers.add("Authorization","Basic "+base64Credentials);
-        HttpEntity<String > entity=new HttpEntity<String>(headers);
-        ResponseEntity<User> exchange = restTemplate.exchange("http://microservice-provider-user/user/{id}", HttpMethod.GET, entity, User.class, id);
         User byId = userFeignClient.findById(id);
-        return exchange.getBody();
+        return byId;
     }
     /**
      * 查询microservice-provider-user 服务的信息并返回
@@ -75,5 +62,15 @@ public class MovieController {
         ServiceInstance serviceInstance = loadBalancerClient.choose("microservice-provider-user");
 //       打印当前选择的是哪个节点
         LOGGER.info("{}:{}:{}",serviceInstance.getServiceId(),serviceInstance.getHost(),serviceInstance.getPort());
+    }
+
+    @GetMapping(value = "/getUser/{id}/{username}")
+    public User getUser(@PathVariable Long id,@PathVariable String username){
+        return userFeignClient.getUser(id,username);
+    }
+
+    @PostMapping(value = "/getUser")
+    public User getUser(@RequestBody User user){
+        return userFeignClient.getUser(user);
     }
 }

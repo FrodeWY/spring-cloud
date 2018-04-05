@@ -24,7 +24,7 @@ spring:
     data: classpath:h2_sql/data.sql
   application:
   #用于指定注册到Eureka Server 上的应用名称
-    name: microservice-provider-user
+    name: microservice-provider-user-with-auth
 #    默认情况下很多端点是不允许访问的，会返回401:Unauthorized。
 #    management.security.enabled=false
 #    或者设置用户名密码，添加spring-boot-starter-security
