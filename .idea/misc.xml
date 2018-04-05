@@ -12,6 +12,7 @@
         <option value="$PROJECT_DIR$/microservice-consumer-movie-ribbon-customizing/pom.xml" />
         <option value="$PROJECT_DIR$/microservice-consumer-movie-without-eureka/pom.xml" />
         <option value="$PROJECT_DIR$/microservice-consumer-movie-feign/pom.xml" />
+        <option value="$PROJECT_DIR$/microservice-consumer-movie-ribbon-hystrix/pom.xml" />
       </list>
     </option>
   </component>
