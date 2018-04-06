@@ -1,0 +1,28 @@
+
+spring:
+  application:
+    name: microservice-hystrix-turbine-mq
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: root
+    password: 123456
+server:
+  port: 8100
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    service-url:
+      defaultZone: http://user:123456@localhost:8070/eureka
+logging:
+  level:
+    root: INFO
+    org.hibernate: INFO
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+    org.hibernate.type.descriptor.sql.BasicExtractor: TRACE
+    org.springframework.cloud.commons.util.InetUtils: TRACE
+
+security:
+  basic:
+    enabled: false

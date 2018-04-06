@@ -1,0 +1,57 @@
+server:
+  port: 8081
+
+security:
+  user:
+    name: user
+    password: 123456
+management:
+  security:
+    enabled: true
+    roles: ADMIN
+info:
+  app:
+    name: @project.artifactId@
+    encoding: @project.build.sourceEncoding@
+    java:
+      source: @java.version@
+      target: @java.version@
+spring:
+  application:
+    name: microservice-consumer-movie-ribbon-hystrix-turbine-mq
+  cloud:
+    inetutils:
+      ignored-interfaces:
+        - docker0
+        - veth.*
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: root
+    password: 123456
+# spring cloud Netflix1.2.0 开始，ribbon支持试用属性自定义ribbon客户端，这种方式鄙视用java配置更方便、
+microservice-provider-user:
+  ribbon:
+    NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule
+eureka:
+  client:
+    service-url:
+#      defaultZone: http://user:123456@peer1:8071/eureka/,http://user:123456@peer2:8072/eureka/
+      defaultZone: http://user:123456@localhost:8070/eureka/
+    healthcheck:
+      enabled: true
+  instance:
+    prefer-ip-address: true
+    #心跳设置，告诉服务器该实例仍在使用
+    lease-renewal-interval-in-seconds: 3
+        #告诉服务器如果10秒内未发送任何续约请求，则关闭该客户端
+    lease-expiration-duration-in-seconds: 10
+
+logging:
+  level:
+    root: INFO
+    org.hibernate: INFO
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+    org.hibernate.type.descriptor.sql.BasicExtractor: TRACE
+    org.springframework.cloud.commons.util.InetUtils: TRACE
+  file: \log\movie.log
