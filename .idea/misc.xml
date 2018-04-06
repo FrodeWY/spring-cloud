@@ -12,7 +12,13 @@
         <option value="$PROJECT_DIR$/microservice-consumer-movie-ribbon-customizing/pom.xml" />
         <option value="$PROJECT_DIR$/microservice-consumer-movie-without-eureka/pom.xml" />
         <option value="$PROJECT_DIR$/microservice-consumer-movie-feign/pom.xml" />
+        <option value="$PROJECT_DIR$/microservice-provider-user-with-auth/pom.xml" />
+        <option value="$PROJECT_DIR$/microservice-consumer-movie-feign-hystrix-fallback/pom.xml" />
         <option value="$PROJECT_DIR$/microservice-consumer-movie-ribbon-hystrix/pom.xml" />
+        <option value="$PROJECT_DIR$/microservice-consumer-movie-feign-manual/pom.xml" />
+        <option value="$PROJECT_DIR$/microservice-hystrix-dashboard/pom.xml" />
+        <option value="$PROJECT_DIR$/microservice-hystrix-turbine/pom.xml" />
+        <option value="$PROJECT_DIR$/microservice-consumer-movie-feign-hystrix-fallback-factory/pom.xml" />
       </list>
     </option>
   </component>

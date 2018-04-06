@@ -17,7 +17,7 @@ info:
       target: @java.version@
 spring:
   application:
-    name: microservice-consumer-movie
+    name: microservice-consumer-movie-without-eureka
 # 脱离Eureka使用Ribbon
 microservice-provider-user:
   ribbon:

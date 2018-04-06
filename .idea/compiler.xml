@@ -10,13 +10,20 @@
         <module name="cloud (2)" />
         <module name="microservice-consumer-movie" />
         <module name="microservice-consumer-movie-feign" />
+        <module name="microservice-consumer-movie-feign (1)" />
+        <module name="microservice-consumer-movie-feign-hystrix-fallback" />
+        <module name="microservice-consumer-movie-feign-hystrix-fallback-factory" />
+        <module name="microservice-consumer-movie-feign-manual" />
         <module name="microservice-consumer-movie-ribbon-customizing" />
         <module name="microservice-consumer-movie-ribbon-hystrix" />
         <module name="microservice-consumer-movie-without-eureka" />
         <module name="microservice-discovery-eureka" />
         <module name="microservice-discovery-eureka-authenticating" />
         <module name="microservice-discovery-eureka-ha" />
+        <module name="microservice-hystrix-dashboard" />
+        <module name="microservice-hystrix-turbine" />
         <module name="microservice-provider-user" />
+        <module name="microservice-provider-user-with-auth" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -24,13 +31,20 @@
       <module name="cloud (2)" target="1.8" />
       <module name="microservice-consumer-movie" target="1.8" />
       <module name="microservice-consumer-movie-feign" target="1.8" />
+      <module name="microservice-consumer-movie-feign (1)" target="1.8" />
+      <module name="microservice-consumer-movie-feign-hystrix-fallback" target="1.8" />
+      <module name="microservice-consumer-movie-feign-hystrix-fallback-factory" target="1.8" />
+      <module name="microservice-consumer-movie-feign-manual" target="1.8" />
       <module name="microservice-consumer-movie-ribbon-customizing" target="1.8" />
       <module name="microservice-consumer-movie-ribbon-hystrix" target="1.8" />
       <module name="microservice-consumer-movie-without-eureka" target="1.8" />
       <module name="microservice-discovery-eureka" target="1.8" />
       <module name="microservice-discovery-eureka-authenticating" target="1.8" />
       <module name="microservice-discovery-eureka-ha" target="1.8" />
+      <module name="microservice-hystrix-dashboard" target="1.8" />
+      <module name="microservice-hystrix-turbine" target="1.8" />
       <module name="microservice-provider-user" target="1.8" />
+      <module name="microservice-provider-user-with-auth" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>

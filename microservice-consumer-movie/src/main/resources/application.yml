@@ -4,6 +4,9 @@ security:
   user:
     name: user
     password: 123456
+  ignored:
+    - /hystrix.stream
+    - /turbine.stream
 management:
   security:
     enabled: true

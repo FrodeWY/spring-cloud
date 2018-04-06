@@ -45,12 +45,12 @@ public class MovieController {
 //    fallbackMethod指定回退方法，commandProperties自定义属性配置HystrixCommand
     @HystrixCommand(fallbackMethod = "findByIdFallback", commandProperties = {
 //            超时时间
-            @HystrixProperty(name = "execution.isolation.thread.timeoutInMilliseconds", value = "5000"),
+            @HystrixProperty(name = "execution.isolation.thread.timeoutInMilliseconds", value = "1000"),
 //            断路器判断健康度时，手机信息所需要的持续时间
             @HystrixProperty(name = "metrics.rollingStats.timeInMilliseconds", value = "10000")
     }, threadPoolProperties = {
 //            核心线程数
-            @HystrixProperty(name = "coreSize", value = "2"),
+            @HystrixProperty(name = "coreSize", value = "1"),
 //            线程池最大队列大小
             @HystrixProperty(name = "maxQueueSize", value = "10")
     })
