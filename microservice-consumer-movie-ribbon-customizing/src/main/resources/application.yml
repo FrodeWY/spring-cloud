@@ -4,6 +4,8 @@ security:
   user:
     name: user
     password: 123456
+  basic:
+    enabled: false
 management:
   security:
     enabled: true
@@ -24,9 +26,9 @@ spring:
         - docker0
         - veth.*
 # spring cloud Netflix1.2.0 开始，ribbon支持试用属性自定义ribbon客户端，这种方式鄙视用java配置更方便、
-microservice-provider-user:
-  ribbon:
-    NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule
+#microservice-provider-user:
+#  ribbon:
+#    NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule
 eureka:
   client:
     service-url:

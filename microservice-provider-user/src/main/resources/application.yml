@@ -32,10 +32,12 @@ security:
   user:
     name: user
     password: 123456
+  basic:
+    enabled: false
 # 开启安全验证
 management:
   security:
-    enabled: true
+    enabled: false
     roles: ADMIN
 # 定义项目info
 info:

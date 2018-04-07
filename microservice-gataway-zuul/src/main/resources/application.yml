@@ -1,0 +1,13 @@
+server:
+  port: 8040
+spring:
+  application:
+    name: microservice-gataway-zuul
+eureka:
+  client:
+    service-url:
+      defaultZone: http://user:123456@localhost:8070/eureka/
+security:
+  user:
+    name: user
+    password: 123456
