@@ -7,9 +7,11 @@ security:
   ignored:
     - /hystrix.stream
     - /turbine.stream
+  basic:
+    enabled: false
 management:
   security:
-    enabled: true
+    enabled: false
     roles: ADMIN
 info:
   app:

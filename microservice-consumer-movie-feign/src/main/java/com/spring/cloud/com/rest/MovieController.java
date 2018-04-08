@@ -46,6 +46,7 @@ public class MovieController {
         User byId = userFeignClient.findById(id);
         return byId;
     }
+
     /**
      * 查询microservice-provider-user 服务的信息并返回
      * @return  microservice-provider-user 服务的信息*/
