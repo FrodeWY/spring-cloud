@@ -33,7 +33,15 @@ public class UserController {
             return null;
         }
     }
-
+    @GetMapping(value = "admin/test",produces = "application/json;charset=UTF-8",consumes = "application/json;charset=UTF-8")
+    public User adminTest(@RequestParam Long id,@RequestParam String username){
+        User one = userRepository.findOne(id);
+        if(one!=null){
+            return one;
+        }else {
+            return null;
+        }
+    }
     @PostMapping(value = "user-post",produces = "application/json;charset=UTF-8",consumes = "application/json;charset=UTF-8")
     public User getUser(@RequestBody User user){
         User one = userRepository.findOne(user.getId());

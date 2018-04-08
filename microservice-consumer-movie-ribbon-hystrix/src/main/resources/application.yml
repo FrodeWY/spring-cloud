@@ -19,7 +19,7 @@ info:
       target: @java.version@
 spring:
   application:
-    name: microservice-consumer-movie-ribbon-hystrix
+    name: microservice-consumer-movie-ribbon-hystrix-v1
   cloud:
     inetutils:
       ignored-interfaces:

@@ -4,7 +4,7 @@ spring:
   application:
     name: microservice-gataway-zuul
   profiles:
-    active: pro1
+    active: pro4
 eureka:
   client:
     service-url:
@@ -38,3 +38,27 @@ microservice-provider-user:
     listOfServers: localhost:8080,localhost:8079
 spring:
   profiles: pro2
+
+---
+#可以通过zuul.prefix可为所有的映射增加统一的前缀。如: /api。默认情况下，代理会在转发前自动剥离这个前缀。
+#如果需要转发时带上前缀，可以配置: zuul.stripPrefix=false来关闭这个默认行为。http://localhost:8040/api/userserver/user/1
+zuul:
+  prefix: /api
+  strip-prefix: true
+  routes:
+    microservice-provider-user: /userserver/**
+spring:
+  profiles: pro3
+---
+#如果想让Zuul代理某个微服务，同时又想保护该微服务的某些敏感路径，可以使用ignored-patterns
+spring:
+  profiles: pro4
+zuul:
+  ignored-patterns: /**/admin/**
+  routes:
+    microservice-provider-user: /userserver/**
+
+logging:
+  level:
+#  查看Zuul日志
+    com.netflix: debug
