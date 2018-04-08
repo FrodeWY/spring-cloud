@@ -4,9 +4,11 @@ security:
   user:
     name: user
     password: 123456
+  basic:
+    enabled: false
 management:
   security:
-    enabled: true
+    enabled: false
     roles: ADMIN
 info:
   app:

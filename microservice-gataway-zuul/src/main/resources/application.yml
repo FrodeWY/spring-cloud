@@ -3,6 +3,8 @@ server:
 spring:
   application:
     name: microservice-gataway-zuul
+  profiles:
+    active: pro1
 eureka:
   client:
     service-url:
@@ -11,3 +13,28 @@ security:
   user:
     name: user
     password: 123456
+---
+zuul:
+  routes:
+  # microservice-provider-user微服务就被映射到/user/**路径
+    microservice-provider-user: /userserver/**
+  # 忽略指定的微服务,'*' 可忽略所有微服务
+  ignored-services: microservice-consumer-movie-feign-hystrix-fallback,microservice-consumer-movie-feign-hystrix-fallback-factory
+spring:
+  profiles: pro1
+---
+zuul:
+  routes:
+    user-routes:
+      path: /userserver/**
+      service-id: microservice-provider-user
+
+ribbon:
+  eureka:
+    enabled: false
+
+microservice-provider-user:
+  ribbon:
+    listOfServers: localhost:8080,localhost:8079
+spring:
+  profiles: pro2
