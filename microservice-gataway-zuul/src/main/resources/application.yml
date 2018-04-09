@@ -4,7 +4,7 @@ spring:
   application:
     name: microservice-gataway-zuul
   profiles:
-    active: pro4
+    active: pro6
 eureka:
   client:
     service-url:
@@ -13,6 +13,10 @@ security:
   user:
     name: user
     password: 123456
+logging:
+  level:
+#  查看Zuul日志
+    com.netflix: debug
 ---
 zuul:
   routes:
@@ -58,7 +62,33 @@ zuul:
   routes:
     microservice-provider-user: /userserver/**
 
-logging:
-  level:
-#  查看Zuul日志
-    com.netflix: debug
+
+---
+spring:
+  profiles: pro5
+zuul:
+  routes:
+    microservice-provider-user:
+      path: /userserver/**
+      # 为microservice-provider-user微服务指定敏感Header
+      sensitive-headers: Cookie,Set-Cookie,Authorization
+#如果没有spring security,该属性默认是空值,
+#如果spring security 在classpath中，同时有需要使用下游的spring security的header时，可以将zuul.ignore-security-headers设置为false
+#  ignore-security-headers: false
+  #全局指定Header，局部敏感会覆盖全区 默认是Cookie,Set-Cookie,Authorization
+#  sensitive-headers:
+
+---
+#上传大文件将超时时间设的长一点，否则回报异常，zuul上传大文件 http://localhost:8040/zuul/microservice-file-upload/upload
+spring:
+  profiles: pro6
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 600000
+ribbon:
+  ConnectTimeout: 3000
+  ReadTimeout: 600000

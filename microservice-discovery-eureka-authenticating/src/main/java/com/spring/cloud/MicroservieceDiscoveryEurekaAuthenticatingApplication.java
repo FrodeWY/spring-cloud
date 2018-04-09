@@ -9,9 +9,9 @@ import org.springframework.cloud.netflix.eureka.server.EnableEurekaServer;
 3.service-url:设置与Eureka Server 交互的网址，查询服务和注册服务都需要依赖这个地址，默认http://localhost:port/eureka；多个地址用','隔开*/
 @EnableEurekaServer
 @SpringBootApplication
-public class MicroservieceDiscoveryApplication {
+public class MicroservieceDiscoveryEurekaAuthenticatingApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(MicroservieceDiscoveryApplication.class, args);
+		SpringApplication.run(MicroservieceDiscoveryEurekaAuthenticatingApplication.class, args);
 	}
 }
