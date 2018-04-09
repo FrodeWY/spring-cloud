@@ -1,0 +1,103 @@
+server:
+  port: 8040
+spring:
+  application:
+    name: microservice-gataway-zuul
+  profiles:
+    active: pro6
+eureka:
+  client:
+    service-url:
+      defaultZone: http://user:123456@localhost:8070/eureka/
+security:
+  user:
+    name: user
+    password: 123456
+logging:
+  level:
+#  查看Zuul日志
+    com.netflix: debug
+---
+zuul:
+  routes:
+  # microservice-provider-user微服务就被映射到/user/**路径
+    microservice-provider-user: /userserver/**
+  # 忽略指定的微服务,'*' 可忽略所有微服务
+  ignored-services: microservice-consumer-movie-feign-hystrix-fallback,microservice-consumer-movie-feign-hystrix-fallback-factory
+spring:
+  profiles: pro1
+---
+zuul:
+  routes:
+    user-routes:
+      path: /userserver/**
+      service-id: microservice-provider-user
+
+ribbon:
+  eureka:
+    enabled: false
+
+microservice-provider-user:
+  ribbon:
+    listOfServers: localhost:8080,localhost:8079
+spring:
+  profiles: pro2
+
+---
+#可以通过zuul.prefix可为所有的映射增加统一的前缀。如: /api。默认情况下，代理会在转发前自动剥离这个前缀。
+#如果需要转发时带上前缀，可以配置: zuul.stripPrefix=false来关闭这个默认行为。http://localhost:8040/api/userserver/user/1
+zuul:
+  prefix: /api
+  strip-prefix: true
+  routes:
+    microservice-provider-user: /userserver/**
+spring:
+  profiles: pro3
+---
+#如果想让Zuul代理某个微服务，同时又想保护该微服务的某些敏感路径，可以使用ignored-patterns
+spring:
+  profiles: pro4
+zuul:
+  ignored-patterns: /**/admin/**
+  routes:
+    microservice-provider-user: /userserver/**
+
+
+---
+spring:
+  profiles: pro5
+zuul:
+  routes:
+    microservice-provider-user:
+      path: /userserver/**
+      # 为microservice-provider-user微服务指定敏感Header
+      sensitive-headers: Cookie,Set-Cookie,Authorization
+#如果没有spring security,该属性默认是空值,
+#如果spring security 在classpath中，同时有需要使用下游的spring security的header时，可以将zuul.ignore-security-headers设置为false
+#  ignore-security-headers: false
+  #全局指定Header，局部敏感会覆盖全区 默认是Cookie,Set-Cookie,Authorization
+#  sensitive-headers:
+
+---
+#上传大文件将超时时间设的长一点，否则回报异常，zuul上传大文件 http://localhost:8040/zuul/microservice-file-upload/upload
+spring:
+  profiles: pro6
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 600000
+ribbon:
+  ConnectTimeout: 3000
+  ReadTimeout: 600000
+
+---
+# 禁用Zuul过滤器按照 zuul.<simpleClassName>.<filterType>.disable=true
+spring:
+  profiles: pro7
+zuul:
+  PreRequestLogFilter:
+    pre:
+      disable: true
