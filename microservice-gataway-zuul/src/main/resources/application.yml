@@ -20,7 +20,7 @@ logging:
 ---
 zuul:
   routes:
-  # microservice-provider-user微服务就被映射到/user/**路径
+  # microservice-provider-user微服务就被映射到/userserver/**路径
     microservice-provider-user: /userserver/**
   # 忽略指定的微服务,'*' 可忽略所有微服务
   ignored-services: microservice-consumer-movie-feign-hystrix-fallback,microservice-consumer-movie-feign-hystrix-fallback-factory
@@ -72,6 +72,7 @@ zuul:
       path: /userserver/**
       # 为microservice-provider-user微服务指定敏感Header
       sensitive-headers: Cookie,Set-Cookie,Authorization
+
 #如果没有spring security,该属性默认是空值,
 #如果spring security 在classpath中，同时有需要使用下游的spring security的header时，可以将zuul.ignore-security-headers设置为false
 #  ignore-security-headers: false
