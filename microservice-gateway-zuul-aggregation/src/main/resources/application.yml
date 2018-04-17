@@ -1,0 +1,20 @@
+spring:
+  application:
+    name: microservice-gateway-zuul-aggregation
+server:
+  port: 8040
+management:
+  security:
+    enabled: false
+eureka:
+  client:
+    service-url:
+      defaultZone: http://user:123456@localhost:8070/eureka
+  instance:
+    prefer-ip-address: true
+logging:
+  level:
+    com.netflix: debug
+
+
+
