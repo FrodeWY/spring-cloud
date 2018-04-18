@@ -1,0 +1,27 @@
+server:
+  port: 8000
+spring:
+  application:
+    name: microservice-config-server
+  cloud:
+    config:
+      server:
+        git:
+        # git uri
+          uri: https://github.com/FrodeWY/spring-cloud-config-repo.git
+#          uri: https://github.com/FrodeWY/{application}
+          username: FrodeWY
+          password: q13073150747
+          #启动时就 clone  Git仓库
+          clone-on-start: true
+#端点与配置文件的映射规则如下：
+#{label}表示分支，默认master
+#/{application}/{profile}/{label}
+#/{application}-{profile}.yml
+#{label}/{application}-{profile}.yml
+#/{application}-{profile}.properties
+#{label}/{application}-{profile}.properties
+#例如访问microservice-foo-dev.properties
+#/microservice-foo/dev
+#/microservice-foo-dev.yml
+#/microservice-foo-dev.properties

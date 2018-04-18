@@ -1,0 +1,18 @@
+spring:
+  application:
+#  对应 config server 所获取的配置文件的{application}
+    name: microservice-foo
+  cloud:
+    config:
+    #config server 的uri
+      uri: http://localhost:8000/
+      #对应 config server 所获取的配置文件的{profile}
+      profile: prod
+      #对应 config server 所获取的配置文件的{label}
+      label: master
+#这些属性要配置在 bootstrap.yml而不是application.yml。如果配置在application.yml中，该部分配置就不能正常工作
+#例如，config Client会连接spring.cloud.config.uri的默认值：http://localhost:8888,而不是配置http://localhost:8000
+#Spring Cloud 有一个"引导上下文"的概念，这是主应用程序的父上下文。引导上下文负责从配置服务器加载配置属性，以及
+#解密外部配置文件中的属性。和主应用程序加载application.*不同，引导上下文加载bootstrap.*中的属性。配置在bootstrap.*
+#中的属性有更高的优先级，因此默认情况下他们是不会被本地配置覆盖
+#如需禁用引导过程：spring.cloud.bootstrap.enabled=false
