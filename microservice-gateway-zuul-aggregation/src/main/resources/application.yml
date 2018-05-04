@@ -9,7 +9,8 @@ management:
 eureka:
   client:
     service-url:
-      defaultZone: http://user:123456@discovery:8070/eureka
+      defaultZone: http://user:123456@${HOST1}:8071/eureka/,http://user:123456@${HOST2}:8072/eureka/
+#      defaultZone: http://user:123456@discovery:8070/eureka
   instance:
     prefer-ip-address: true
 logging:

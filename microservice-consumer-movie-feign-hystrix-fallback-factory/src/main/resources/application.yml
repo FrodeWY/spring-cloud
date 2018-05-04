@@ -34,8 +34,8 @@ feign:
 eureka:
   client:
     service-url:
-#      defaultZone: http://user:123456@peer1:8071/eureka/,http://user:123456@peer2:8072/eureka/
-      defaultZone: http://user:123456@discovery:8070/eureka/
+      defaultZone: http://user:123456@${HOST1}:8071/eureka/,http://user:123456@${HOST2}:8072/eureka/
+#      defaultZone: http://user:123456@discovery:8070/eureka/
     healthcheck:
       enabled: true
   instance:

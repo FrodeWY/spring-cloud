@@ -15,24 +15,24 @@ security:
 spring:
   profiles: peer1
 server:
-  port: 8071
+  port: ${PORT}
 eureka:
   instance:
     hostname: peer1
   client:
     service-url:
-      defaultZone: http://peer2:8072/eureka/
+      defaultZone: http://user:123456@${HOST}:8072/eureka/
 ---
 spring:
   profiles: peer2
 server:
-  port: 8072
+  port: ${PORT}
 eureka:
   instance:
     hostname: peer2
   client:
     service-url:
-      defaultZone: http://peer1:8071/eureka/
+      defaultZone: http://user:123456@${HOST}:8071/eureka/
 ---
 # 单节点
 spring:
@@ -40,8 +40,8 @@ spring:
 server:
   port: 8070
 eureka:
-#  instance:
-#    hostname: discovery
+  instance:
+    hostname: discovery
   client:
   #service-url:设置与Eureka Server 交互的网址，查询服务和注册服务都需要依赖这个地址，默认http://localhost:port/eureka；多个地址用','隔开*/
     service-url:

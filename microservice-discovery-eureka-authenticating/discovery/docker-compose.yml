@@ -1,32 +1,44 @@
-version: '0.0.2'
+version: "0.0.3"
+
 services:
-  discovery:
-    image: frodewy/microservice-discovery-eureka:0.0.1
+
+  peer1:
+    image: discovery
     ports:
-      - "8070:8070"
+      - "8071:8071"
+    hostname: peer1
+    environment:
+      - spring.profiles.active=peer1
+      - PORT=8071
+      - HOST=192.168.0.104
+
+  peer2:
+    image: discovery
+    ports:
+      - "8072:8072"
+    hostname: peer2
+    environment:
+      - spring.profiles.active=peer2
+      - PORT=8072
+      - HOST=192.168.0.104
 
   microservice-provider-user:
-    image: frodewy/microservice-provider-user:0.0.1
-    ports:
-      - "8080:8080"
+    image: frodewy/microservice-provider-user:0.0.3
+
+    environment:
+      - HOST1=192.168.0.104
+      - HOST2=192.168.0.104
+
   microservice-consumer-movie:
-    image: frodewy/microservice-consumer-movie:0.0.1
-    ports:
-      - "8081:8081"
+    image: frodewy/microservice-consumer-movie:0.0.3
+
+    environment:
+      - HOST1=192.168.0.104
+      - HOST2=192.168.0.104
+
   microservice-gataway-zuul:
-    image: frodewy/microservice-gataway-zuul:0.0.1
-    ports:
-      - "8001:8001"
+    image: frodewy/microservice-gataway-zuul:0.0.3
 
-  microservice-hystrix-dashboard:
-    image: frodewy/microservice-hystrix-dashboard:0.0.1
-    ports:
-      - "8101:8101"
-
-  microservice-hystrix-turbine:
-    image: frodewy/microservice-hystrix-turbine:0.0.1
-    ports:
-      - "8100:8100"
-networks:
-  default:
-    driver: discovery
+    environment:
+      - HOST1=192.168.0.104
+      - HOST2=192.168.0.104
