@@ -40,8 +40,8 @@ spring:
 server:
   port: 8070
 eureka:
-  instance:
-    hostname: discovery
+#  instance:
+#    hostname: discovery
   client:
   #service-url:设置与Eureka Server 交互的网址，查询服务和注册服务都需要依赖这个地址，默认http://localhost:port/eureka；多个地址用','隔开*/
     service-url:

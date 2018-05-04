@@ -1,6 +1,6 @@
-version: '0.0.1'
+version: '0.0.2'
 services:
-  microservice-discovery-eureka:
+  discovery:
     image: frodewy/microservice-discovery-eureka:0.0.1
     ports:
       - "8070:8070"
@@ -9,29 +9,24 @@ services:
     image: frodewy/microservice-provider-user:0.0.1
     ports:
       - "8080:8080"
-    links:
-      - microservice-discovery-eureka:discovery
   microservice-consumer-movie:
     image: frodewy/microservice-consumer-movie:0.0.1
     ports:
       - "8081:8081"
-    links:
-      - microservice-discovery-eureka:discovery
   microservice-gataway-zuul:
     image: frodewy/microservice-gataway-zuul:0.0.1
     ports:
       - "8001:8001"
-    links:
-      - microservice-discovery-eureka:discovery
+
   microservice-hystrix-dashboard:
     image: frodewy/microservice-hystrix-dashboard:0.0.1
     ports:
       - "8101:8101"
-    links:
-      - microservice-discovery-eureka:discovery
+
   microservice-hystrix-turbine:
     image: frodewy/microservice-hystrix-turbine:0.0.1
     ports:
       - "8100:8100"
-    links:
-      - microservice-discovery-eureka:discovery
+networks:
+  default:
+    driver: discovery
