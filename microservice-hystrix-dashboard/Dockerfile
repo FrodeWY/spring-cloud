@@ -6,6 +6,6 @@ VOLUME /tmp
 
 COPY ./target/*.jar /app.jar
 
-EXPOSE 8100
+EXPOSE 8101
 
 ENTRYPOINT ["java","-Djava.security.egd=/dev/./urandom","-jar","/app.jar"]

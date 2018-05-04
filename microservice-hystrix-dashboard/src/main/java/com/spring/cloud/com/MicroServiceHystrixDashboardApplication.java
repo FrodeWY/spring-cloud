@@ -11,10 +11,10 @@ import org.springframework.cloud.netflix.hystrix.dashboard.EnableHystrixDashboar
 @EnableHystrix
 @EnableDiscoveryClient
 @EnableHystrixDashboard
-public class MicroServiceHystrixDashboardkApplication {
+public class MicroServiceHystrixDashboardApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(MicroServiceHystrixDashboardkApplication.class, args);
+		SpringApplication.run(MicroServiceHystrixDashboardApplication.class, args);
 	}
 
 }

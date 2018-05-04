@@ -7,9 +7,11 @@ security:
   ignored:
     - /hystrix.stream
     - /turbine.stream
+  basic:
+    enabled: false
 management:
   security:
-    enabled: true
+    enabled: false
     roles: ADMIN
 info:
   app:
@@ -19,11 +21,11 @@ info:
       source: @java.version@
       target: @java.version@
 spring:
-  cloud:
-    inetutils:
-      ignored-interfaces:
-        - docker0
-        - veth.*
+#  cloud:
+#    inetutils:
+#      ignored-interfaces:
+#        - docker0
+#        - veth.*
   application:
     name: microservice-consumer-movie-hystrix-fallback-factory
 feign:
@@ -33,7 +35,7 @@ eureka:
   client:
     service-url:
 #      defaultZone: http://user:123456@peer1:8071/eureka/,http://user:123456@peer2:8072/eureka/
-      defaultZone: http://user:123456@localhost:8070/eureka/
+      defaultZone: http://user:123456@discovery:8070/eureka/
     healthcheck:
       enabled: true
   instance:
