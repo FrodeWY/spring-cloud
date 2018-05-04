@@ -41,11 +41,11 @@ server:
   port: 8070
 eureka:
   instance:
-    hostname: localhost
+    hostname: discovery
   client:
   #service-url:设置与Eureka Server 交互的网址，查询服务和注册服务都需要依赖这个地址，默认http://localhost:port/eureka；多个地址用','隔开*/
     service-url:
-      defaultZone: http://localhost:8070/eureka/
+      defaultZone: http://discovery:8070/eureka/
     #register-with-eureka:表示是否将自己注册到Eureka Server,默认为true，这里是单节点设置为false
     register-with-eureka: false
     #fetch-registry:表示是否从Eureka Server 获取注册信息，默认为true，由于当前应用是单点的Eureka Server，不需要同步其他的Eureka Server 节点的数据，故设置为false
